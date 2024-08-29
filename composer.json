@@ -1,0 +1,31 @@
+{
+    "name": "codiliateur/laravel-model-extensions",
+    "description": "Any extensions for Eloquent/Model",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Codiliateur\\LaravelModelExtensions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codiliateur\\LaravelModelExtensions\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ilia Khondozhko",
+            "email": "ilia.khondozhko@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^11.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.10",
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^11.3",
+        "orchestra/testbench": "^9.4"
+    }
+}
