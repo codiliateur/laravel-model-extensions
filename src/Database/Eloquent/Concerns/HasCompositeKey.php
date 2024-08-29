@@ -6,16 +6,21 @@ use Codiliateur\LaravelModelExtensions\Database\Eloquent\CompositeKeyModel;
 use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
 use Illuminate\Database\Eloquent\Builder;
 use Codiliateur\LaravelModelExtensions\Database\Eloquent\CompositeKeyBuilder;
- use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 trait HasCompositeKey
 {
-    protected static string $builder = CompositeKeyBuilder::class;
-
     /**
-     * @var array|string
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param QueryBuilder $query
+     * @return CompositeKeyBuilder <*>
      */
-    protected $primaryKey;
+    public function newEloquentBuilder($query)
+    {
+        return new CompositeKeyBuilder($query);
+    }
 
     /**
      * @return array<int, string>|string
