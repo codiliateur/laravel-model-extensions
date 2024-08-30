@@ -2,6 +2,7 @@
 
 namespace Codiliateur\LaravelModelExtensions\Database\Eloquent;
 
+use Codiliateur\LaravelModelExtensions\Exceptions\NotCompositeKeyException;
 use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder as BaseBuilder;
@@ -167,7 +168,7 @@ class CompositeKeyBuilder extends BaseBuilder implements BuilderContract
      *
      * @return array
      *
-     * @throws \RuntimeException
+     * @throws NotCompositeKeyException
      */
     protected function normalizeCompositeKeysArgument($keys)
     {
@@ -181,7 +182,7 @@ class CompositeKeyBuilder extends BaseBuilder implements BuilderContract
                         $keys instanceof Enumerable ? $keys->all() : $keys
                     );
                 }
-                throw new \RuntimeException('Model in argument $id must descends CompositeKeyModel');
+                throw new NotCompositeKeyException('Model in argument $id must descends CompositeKeyModel');
             } elseif (is_array($keys[0])) {
                 return $keys;
             } else {
@@ -191,9 +192,9 @@ class CompositeKeyBuilder extends BaseBuilder implements BuilderContract
             if ($keys instanceof CompositeKeyModel) {
                 return [$keys->getKey()];
             }
-            throw new \RuntimeException('Model in argument $id must descends CompositeKeyModel');
+            throw new NotCompositeKeyException('Model in argument $id must descends CompositeKeyModel');
         }
-        throw new \RuntimeException('Model require composite key');
+        throw new NotCompositeKeyException('Must use composite key with CompositeKeyModel');
     }
 
     /**
